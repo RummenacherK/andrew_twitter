@@ -26,6 +26,9 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Compose New Tweet", new_tweet_path %></li>
           </ul>
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Search Twitter", tweets_path %></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li class="dropdown">
