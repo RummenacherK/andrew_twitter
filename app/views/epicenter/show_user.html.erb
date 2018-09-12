@@ -1,22 +1,41 @@
-<h1>@<%= @user.username %>'s Profile & Tweets</h1>
-
-<p><%= @user.name %></p>
-<p><%= @user.location %></p>
-<p><%= @user.bio %></p>
-
-<p>
-    <% if current_user.following.include?(@user.id) %>
-        <%= link_to "Unfollow", unfollow_path(id: @user.id), class: "btn btn-danger" %>
-    <% else %>
-      <% if current_user.id != @user.id %>
-	      <%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary" %>
-	    <% end %>
-    <% end %>
-</p>
-
-<% @user.tweets.each do |tweet| %>
-    <div>
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-center">@<%= @user.username %>'s Profile & Tweets</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <p class="text-center"><%= @user.name %></p>
+  </div>
+  <div class="col-md-6">
+    <p class="text-center"><%= @user.location %></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p class="text-center"><%= @user.bio %></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p class="text-right">
+        <% if current_user.following.include?(@user.id) %>
+            <%= link_to "Following", unfollow_path(id: @user.id), class: "btn btn-primary", id: "unfollow_btn" %>
+        <% else %>
+          <% if current_user.id != @user.id %>
+    	      <%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary" %>
+    	    <% end %>
+        <% end %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <% @user.tweets.each do |tweet| %>
         <p>@<%= @user.username %></p>
-	      <p><%= tweet.message %></p>
+      	<p><%= tweet.message.html_safe %></p>
+      <% end %>
     </div>
-<% end %>
+  </div>
+</div>
